@@ -2,7 +2,8 @@ CC = g++
 EXECUTABLE = run.exe
 
 SOURCES = main.cpp   \
-		  signal_generator\simple_signal_generator.cpp
+		  signal_generator\simple_signal_generator.cpp \
+		  signal_generator\normal_noise_signal_generator.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

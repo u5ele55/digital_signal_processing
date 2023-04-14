@@ -9,9 +9,9 @@ class SimpleSignalGenerator : public ISignalGenerator {
     double m_phase;
 public:
     SimpleSignalGenerator(double amplitude, double frequency, double phase);
-    double signalAt(double time) const;
+    double signalAt(double time);
     std::vector<double> getSignalSequence(
-        double start, double step, int quantity) const;
+        double start, double step, int quantity);
 };
 
 #endif
