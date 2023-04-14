@@ -1,6 +1,7 @@
 #include <iostream>
 #include "signal_generator/simple_signal_generator.hpp"
 #include "signal_generator/normal_noise_signal_generator.hpp"
+#include "filtering/windowing_signal_filter.hpp"
 
 int main()
 {
@@ -11,10 +12,13 @@ int main()
     auto signals = generator->getSignalSequence(0, 0.1, N);
     auto noisySignals = noisyGenerator->getSignalSequence(0, 0.1, N);
 
-    for (int i = 0; i < N; i ++ ) {
-        std::cout << signals[i] << " " << noisySignals[i] << '\n';
-    }
+    ISignalFilter * wFilter = new WindowingSignalFilter(3);
+    auto filtered = wFilter->filteredSequence(noisySignals);
 
+    for (int i = 0; i < N; i ++ ) {
+        std::cout << signals[i] << " " << noisySignals[i] << " -> " << filtered[i] << '\n';
+    }
+    
     delete generator;
     delete noisyGenerator;
 
