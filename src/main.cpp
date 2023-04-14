@@ -4,8 +4,8 @@
 
 int main()
 {
-    ISignalGenerator * generator = new SimpleSignalGenerator(5, 3, 0);    
-    ISignalGenerator * noisyGenerator = new NormalNoiseSignalGenerator(5, 3, 0, 0.1);
+    ISignalGenerator * generator = new SimpleSignalGenerator(10, 3, 0);    
+    ISignalGenerator * noisyGenerator = new NormalNoiseSignalGenerator(10, 3, 0, 0.1);
 
     int N = 25;
     auto signals = generator->getSignalSequence(0, 0.1, N);
