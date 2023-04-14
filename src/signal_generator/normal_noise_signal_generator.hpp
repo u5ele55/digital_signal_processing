@@ -10,8 +10,8 @@ class NormalNoiseSignalGenerator : public ISignalGenerator {
     double m_frequency;
     double m_phase;
     double m_dispersion;
-    mutable std::default_random_engine m_generator;
-    mutable std::normal_distribution<double> m_distribution;
+    std::default_random_engine m_generator;
+    std::normal_distribution<double> m_distribution;
 public:
     NormalNoiseSignalGenerator(
         double amplitude, double frequency, double phase, double dispersion);
