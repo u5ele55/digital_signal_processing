@@ -19,6 +19,8 @@ public:
     /// signal value at 'start + i * step' moment of time
     virtual std::vector<double> getSignalSequence(
         double start, double step, int quantity) = 0;
+
+    virtual ~ISignalGenerator() {}
 };
 
 #endif

@@ -9,6 +9,8 @@ public:
     /// @param sequence Values of signal measurements
     /// @return Vector with filtered values
     virtual std::vector<double> filteredSequence(const std::vector<double> &sequence) = 0;
+
+    virtual ~ISignalFilter() {}
 };
 
 #endif
