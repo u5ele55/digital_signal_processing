@@ -11,20 +11,20 @@ double StandartAutocorrelationFunction::evaluateAt(const std::vector<double> &si
     std::vector<double> start(signals.begin(), signals.end() - lag);
     std::vector<double> shifted(signals.begin() + lag, signals.end());
 
-    double middleStart = std::accumulate(start.begin(), start.end(), 0.0) / (N - lag);
-    double middleShifted = std::accumulate(shifted.begin(), shifted.end(), 0.0) / (N - lag);
+    double meanStart = std::accumulate(start.begin(), start.end(), 0.0) / (N - lag);
+    double meanShifted = std::accumulate(shifted.begin(), shifted.end(), 0.0) / (N - lag);
 
-    double middleOfProduct = 0;
+    double meanOfProduct = 0;
 
     for(int i = 0; i < N - lag; i ++) {
-        middleOfProduct += start[i] * shifted[i];
+        meanOfProduct += start[i] * shifted[i];
     }
-    middleOfProduct /= N - lag;
+    meanOfProduct /= N - lag;
 
     double skoStart   = std::sqrt( MathUtilities::dispersion(start) );
     double skoShifted = std::sqrt( MathUtilities::dispersion(shifted) );
 
-    double r = (middleOfProduct - middleStart * middleShifted) / (skoShifted * skoStart);
+    double r = (meanOfProduct - meanStart * meanShifted) / (skoShifted * skoStart);
 
     return r;
 }
