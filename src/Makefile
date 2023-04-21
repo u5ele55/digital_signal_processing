@@ -7,6 +7,7 @@ SOURCES = main.cpp   \
 		  filtering\signal_filter.cpp \
 		  filtering\windowing_signal_filter.cpp \
 		  autocorrelation\standart_autocorrelation_function.cpp \
+		  autocorrelation\fft_autocorrelation_function.cpp \
 		  utilities\math_utilities.cpp \
 		  deviation\deviation_sequence.cpp \
 		  deviation\deviation_distribution_function.cpp
