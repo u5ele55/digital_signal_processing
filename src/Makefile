@@ -2,6 +2,7 @@ CC = g++ -Wall
 EXECUTABLE = run.exe
 
 SOURCES = main.cpp   \
+		  core\core.cpp \
 		  signal_generator\simple_signal_generator.cpp \
 		  signal_generator\normal_noise_signal_generator.cpp \
 		  filtering\signal_filter.cpp \
