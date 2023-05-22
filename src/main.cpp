@@ -1,7 +1,5 @@
-#include <iostream>
-#include <memory>
-
 #include "core/core.hpp"
+
 int main()
 {
     Core core;

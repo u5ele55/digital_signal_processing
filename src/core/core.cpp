@@ -15,7 +15,13 @@
 #include "../deviation/deviation_sequence.hpp"
 #include "../deviation/deviation_distribution_function.hpp"
 
-void Core::start() {
+Core::Core(std::string outputFile)
+{
+    stream.open(outputFile);
+}
+
+void Core::start()
+{
     std::cout << "Choose signal generator type: \n";
     std::cout << "1. Asin(wt + p)\n2. Asin(wt + p) + noise\n";
 
@@ -43,25 +49,29 @@ void Core::start() {
     printAllInfo();
 }
 
+Core::~Core()
+{
+    stream.close();
+}
+
 void Core::printAllInfo() {
-    std::ofstream outputFile("result.txt");
-    std::ostream &stream = m_signals.size() > 32 ? outputFile : std::cout;
     if (m_signals.size() > 16) {
         std::cout << "\n\n Result printed to file \n";
     }
+
     stream << "\n --- RESULT --- \n\n";
     stream << std::fixed << std::setprecision(3);
 
-    stream << "Generated signal sequence: \n\t";
-    for(const auto &signal : m_signals) {
-        stream << signal << ' ';
+    stream << "Generated signal sequence: \n";
+    for(size_t i = 0; i < m_signals.size(); i ++) {
+        stream << '\t' << startTime + step * i << ' ' << m_signals[i] << '\n';
     }
     stream << '\n';
 
-    stream << "Filtered signal sequence: \n\t";
+    stream << "Filtered signal sequence: \n";
     auto filteredSignals = m_signalFilter->filteredSequence(m_signals);
-    for(const auto &signal : filteredSignals) {
-        stream << signal << ' ';
+    for(size_t i = 0; i < filteredSignals.size(); i ++) {
+        stream << '\t' << startTime + step * i << " " << filteredSignals[i] << '\n';
     }
     stream << '\n';
 
@@ -94,14 +104,14 @@ void Core::printAllInfo() {
 
 
 void Core::chooseGenerator(int type) {
+    
     while (type < 1 || type > 2) {
         std::cout << "Enter valid type!\n";
         std::cin >> type;
     }
-    
-
+    double A, w, p;
+    double disp;
     if (type == 1 || type == 2) {
-        double A, w, p;
         std::cout << "Enter A: "; std::cin >> A;
         std::cout << "Enter w: "; std::cin >> w;
         std::cout << "Enter p: "; std::cin >> p;
@@ -109,20 +119,23 @@ void Core::chooseGenerator(int type) {
         if (type == 1) {
             m_signalGenerator.reset(new SimpleSignalGenerator(A, w, p));
         } else {
-            double disp;
             std::cout << "Enter dispersion: "; std::cin >> disp;
             m_signalGenerator.reset(new NormalNoiseSignalGenerator(A, w, p, disp));
         }
     }
 
-    
-    double startTime, step;
     std::cout << "Enter start time: "; std::cin >> startTime;
     std::cout << "Enter step: "; std::cin >> step;
     int quantity;
     std::cout << "Enter sample size: "; std::cin >> quantity;
 
     m_signals = m_signalGenerator->getSignalSequence(startTime, step, quantity);
+
+    stream << "Generator:\n\tA = " << A << "\n\tw = " << w << "\n\tp = " << p << '\n';
+    if (type == 2) {
+        stream << "\tdispersion = " << disp << '\n';
+    }
+    stream << "\tstart time: " << startTime << "\n\tstep: " << step << "\n\tsample size: " << quantity << '\n';
 }
 
 void Core::chooseFilter(int type) {

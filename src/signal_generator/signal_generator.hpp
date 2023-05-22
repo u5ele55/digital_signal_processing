@@ -2,6 +2,7 @@
 #define SIGNAL_GENERATOR
 
 #include <vector>
+#include <iostream>
 
 class ISignalGenerator {
 
