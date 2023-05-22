@@ -33,4 +33,5 @@
 <br>
 ![изображение](https://user-images.githubusercontent.com/99137907/234002809-baedc0ef-e510-4a74-90a1-ac7d475796b0.png)
 <br>
-
+![изображение](https://github.com/u5ele55/digital_signal_processing/assets/99137907/22a485ce-25fa-480b-8561-2cb34cd9a397)
+<br>
